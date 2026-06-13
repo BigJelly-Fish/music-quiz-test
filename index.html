@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Aptitude Test</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; background: #f0f2f5; color: #333; line-height: 1.6; padding: 20px; }
+    .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); padding: 30px; }
+    h1 { text-align: center; font-size: 28px; margin-bottom: 10px; color: #1a1a2e; }
+    .warning { background: #fff3cd; border: 1px solid #ffc107; border-radius: 12px; padding: 16px; margin-bottom: 25px; font-weight: 600; color: #856404; line-height: 1.7; }
+    .subtitle { text-align: center; font-size: 14px; color: #666; margin-bottom: 30px; }
+    .section { margin-bottom: 35px; }
+    .section h2 { font-size: 20px; border-left: 5px solid #4a6cf7; padding-left: 12px; margin-bottom: 20px; color: #1a1a2e; }
+    .question { background: #fafbfc; border-radius: 12px; padding: 18px; margin-bottom: 18px; border: 1px solid #e9ecef; }
+    .question p { font-weight: 600; margin-bottom: 8px; }
+    audio { width: 100%; margin: 8px 0 12px; border-radius: 8px; }
+    .options label { display: block; margin: 6px 0; cursor: pointer; padding: 4px 8px; border-radius: 6px; transition: background 0.2s; }
+    .options label:hover { background: #eef2ff; }
+    input[type="radio"], input[type="checkbox"] { margin-right: 8px; transform: scale(1.1); }
+    .blank-input { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 8px; }
+    .blank-input input { width: 80px; padding: 8px 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
+    .blank-input input:focus { border-color: #4a6cf7; outline: none; }
+    select { padding: 10px 15px; border-radius: 8px; border: 2px solid #ddd; font-size: 16px; background: white; }
+    .btn { display: block; width: 100%; padding: 14px; background: #4a6cf7; color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: 600; cursor: pointer; margin-top: 20px; transition: background 0.2s; }
+    .btn:hover { background: #3451d1; }
+    .result { display: none; text-align: center; font-size: 22px; font-weight: bold; margin-top: 25px; padding: 20px; background: #eef2ff; border-radius: 12px; }
+    .grade { font-size: 28px; color: #4a6cf7; margin-top: 5px; }
+    .answer-review { margin-top: 30px; background: #f8f9fa; border-radius: 12px; padding: 20px; display: none; }
+    .answer-review h3 { margin-bottom: 15px; }
+    .answer-item { padding: 10px; border-bottom: 1px solid #e9ecef; display: flex; justify-content: space-between; flex-wrap: wrap; }
+    .answer-item:last-child { border-bottom: none; }
+    .correct { color: #28a745; font-weight: bold; }
+    .wrong { color: #dc3545; font-weight: bold; }
+    .skip { color: #6c757d; font-weight: bold; }
+    .footer { text-align: center; margin-top: 30px; font-size: 13px; color: #aaa; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>🎵 Music Aptitude Test</h1>
+  <div class="warning">
+    ⚠️ <strong>Important Notice:</strong> Honest answers are responsible for yourself. Based on real ability, we will help you find the project that best suits your strengths. If you are completely unsure of a question, please choose <u>Skip this question</u>. Conversely, if you guess correctly and enter an unsuitable project, you will not be able to handle it, which is detrimental to both parties.
+  </div>
+  <p class="subtitle">Total Score: 100  |  Multiple Choice: 50  |  True/False: 20  |  Short Answer: 30</p>
+
+  <form id="quizForm">
+    <!-- Section I: Multiple Choice -->
+    <div class="section">
+      <h2>I. Multiple Choice (1-10: 3 pts each, 11-15: 4 pts each)</h2>
+
+      <!-- Q1 -->
+      <div class="question" data-type="single" data-answer="B" data-score="3">
+        <p>1. Listen to Clip 1. Which emotion best matches the music?</p>
+        <audio controls preload="none" src="01.mp3"></audio>
+        <div class="options">
+          <label><input type="radio" name="q1" value="A"> A. Tense, suspenseful</label>
+          <label><input type="radio" name="q1" value="B"> B. Happy, excited</label>
+          <label><input type="radio" name="q1" value="C"> C. Sad, lyrical</label>
+          <label><input type="radio" name="q1" value="D"> D. Calm, relaxed</label>
+          <label><input type="radio" name="q1" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question" data-type="single" data-answer="A" data-score="3">
+        <p>2. Listen to Clip 2. How would you describe the vocal timbre?</p>
+        <audio controls preload="none" src="02.mp3"></audio>
+        <div class="options">
+          <label><input type="radio" name="q2" value="A"> A. Husky and thick</label>
+          <label><input type="radio" name="q2" value="B"> B. Bright and soft</label>
+          <label><input type="radio" name="q2" value="C"> C. Breathy and dreamy</label>
+          <label><input type="radio" name="q2" value="D"> D. Sharp and powerful</label>
+          <label><input type="radio" name="q2" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question" data-type="single" data-answer="A" data-score="3">
+        <p>3. What musical element does the term "Allegro" refer to?</p>
+        <div class="options">
+          <label><input type="radio" name="q3" value="A"> A. Tempo</label>
+          <label><input type="radio" name="q3" value="B"> B. Dynamics</label>
+          <label><input type="radio" name="q3" value="C"> C. Pitch</label>
+          <label><input type="radio" name="q3" value="D"> D. Timbre</label>
+          <label><input type="radio" name="q3" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="question" data-type="single" data-answer="B" data-score="3">
+        <p>4. Listen to Clip 3. Which genre best fits this song?</p>
+        <audio controls preload="none" src="03.mp3"></audio>
+        <div class="options">
+          <label><input type="radio" name="q4" value="A"> A. Rock</label>
+          <label><input type="radio" name="q4" value="B"> B. Hip-hop</label>
+          <label><input type="radio" name="q4" value="C"> C. Electronic</label>
+          <label><input type="radio" name="q4" value="D"> D. Folk</label>
+          <label><input type="radio" name="q4" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question" data-type="single" data-answer="A" data-score="3">
+        <p>5. A typical pop song contains all six sections below. What is the most common order?</p>
+        <div class="options">
+          <label><input type="radio" name="q5" value="A"> A. Intro → Verse → Pre-Chorus → Chorus → Bridge → Outro</label>
+          <label><input type="radio" name="q5" value="B"> B. Intro → Chorus → Verse → Pre-Chorus → Bridge → Outro</label>
+          <label><input type="radio" name="q5" value="C"> C. Verse → Pre-Chorus → Chorus → Intro → Bridge → Outro</label>
+          <label><input type="radio" name="q5" value="D"> D. Intro → Pre-Chorus → Verse → Chorus → Bridge → Outro</label>
+          <label><input type="radio" name="q5" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="question" data-type="single" data-answer="B" data-score="3">
+        <p>6. Which of the following is a typical characteristic of Jazz?</p>
+        <div class="options">
+          <label><input type="radio" name="q6" value="A"> A. Distorted guitar and fast strumming</label>
+          <label><input type="radio" name="q6" value="B"> B. Syncopated rhythms and horn improvisation</label>
+          <label><input type="radio" name="q6" value="C"> C. 808 drum machine and auto-tune</label>
+          <label><input type="radio" name="q6" value="D"> D. Mostly triads with regular rhythms</label>
+          <label><input type="radio" name="q6" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q7 (Multiple) -->
+      <div class="question" data-type="multi" data-score="3" data-correct="A,C,D" data-extra="B">
+        <p>7. Listen to Clip 4. Which instruments do you hear? (Select all that apply)</p>
+        <audio controls preload="none" src="04.mp3"></audio>
+        <div class="options">
+          <label><input type="checkbox" name="q7" value="A"> A. Acoustic Guitar</label>
+          <label><input type="checkbox" name="q7" value="B"> B. Piano</label>
+          <label><input type="checkbox" name="q7" value="C"> C. Electronic Drums</label>
+          <label><input type="checkbox" name="q7" value="D"> D. Synthesizer</label>
+          <label><input type="checkbox" name="q7" value="E"> E. Cello</label>
+          <label><input type="checkbox" name="q7" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="question" data-type="single" data-answer="C" data-score="3">
+        <p>8. Which device/plugin is primarily used to control the dynamic range of a sound?</p>
+        <div class="options">
+          <label><input type="radio" name="q8" value="A"> A. Reverb</label>
+          <label><input type="radio" name="q8" value="B"> B. Delay</label>
+          <label><input type="radio" name="q8" value="C"> C. Compressor</label>
+          <label><input type="radio" name="q8" value="D"> D. Equalizer</label>
+          <label><input type="radio" name="q8" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="question" data-type="single" data-answer="C" data-score="3">
+        <p>9. Listen to Clip 5. What is the time signature?</p>
+        <audio controls preload="none" src="05.mp3"></audio>
+        <div class="options">
+          <label><input type="radio" name="q9" value="A"> A. 4/4</label>
+          <label><input type="radio" name="q9" value="B"> B. 3/4</label>
+          <label><input type="radio" name="q9" value="C"> C. 6/8</label>
+          <label><input type="radio" name="q9" value="D"> D. 7/8</label>
+          <label><input type="radio" name="q9" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="question" data-type="single" data-answer="B" data-score="3">
+        <p>10. The chord progression I–V–vi–IV in C major translates to which chord names?</p>
+        <div class="options">
+          <label><input type="radio" name="q10" value="A"> A. C - F - Am - G</label>
+          <label><input type="radio" name="q10" value="B"> B. C - G - Am - F</label>
+          <label><input type="radio" name="q10" value="C"> C. C - Am - G - F</label>
+          <label><input type="radio" name="q10" value="D"> D. F - G - Em - Am</label>
+          <label><input type="radio" name="q10" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q11 -->
+      <div class="question" data-type="single" data-answer="C" data-score="4">
+        <p>11. Listen to Clip 6. What effect is mainly used on the vocal?</p>
+        <audio controls preload="none" src="06.mp3"></audio>
+        <div class="options">
+          <label><input type="radio" name="q11" value="A"> A. Large reverb, no delay</label>
+          <label><input type="radio" name="q11" value="B"> B. Clear delay (echo), little reverb</label>
+          <label><input type="radio" name="q11" value="C"> C. Large reverb + large delay</label>
+          <label><input type="radio" name="q11" value="D"> D. Almost dry, only subtle compression</label>
+          <label><input type="radio" name="q11" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q12 -->
+      <div class="question" data-type="single" data-answer="B" data-score="4">
+        <p>12. Listen to Clip 7. How would you best describe the bass sound? <em>(We recommend using headphones for this question.)</em></p>
+        <audio controls preload="none" src="07.mp3"></audio>
+        <div class="options">
+          <label><input type="radio" name="q12" value="A"> A. Fretless acoustic bass, smooth tone</label>
+          <label><input type="radio" name="q12" value="B"> B. Synth sub bass, round and thick</label>
+          <label><input type="radio" name="q12" value="C"> C. Distorted synth bass, prominent mids/highs and fat</label>
+          <label><input type="radio" name="q12" value="D"> D. Picked P-bass, punchy attack</label>
+          <label><input type="radio" name="q12" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q13 -->
+      <div class="question" data-type="single" data-answer="B" data-score="4">
+        <p>13. When arranging, what is the common way to prevent instruments from clashing in frequency?</p>
+        <div class="options">
+          <label><input type="radio" name="q13" value="A"> A. Set all faders to the same volume</label>
+          <label><input type="radio" name="q13" value="B"> B. Use EQ to assign different frequency ranges to each instrument</label>
+          <label><input type="radio" name="q13" value="C"> C. Add the same reverb to all instruments</label>
+          <label><input type="radio" name="q13" value="D"> D. Pan everything to the center</label>
+          <label><input type="radio" name="q13" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q14 -->
+      <div class="question" data-type="single" data-answer="B" data-score="4">
+        <p>14. What is the interval structure of a diminished seventh chord (dim7)?</p>
+        <div class="options">
+          <label><input type="radio" name="q14" value="A"> A. Minor third + minor third + major third</label>
+          <label><input type="radio" name="q14" value="B"> B. Minor third + minor third + minor third</label>
+          <label><input type="radio" name="q14" value="C"> C. Major third + minor third + minor third</label>
+          <label><input type="radio" name="q14" value="D"> D. Major third + major third + minor third</label>
+          <label><input type="radio" name="q14" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+
+      <!-- Q15 -->
+      <div class="question" data-type="single" data-answer="B" data-score="4">
+        <p>15. What is the classic application of Sidechain Compression in electronic dance music?</p>
+        <div class="options">
+          <label><input type="radio" name="q15" value="A"> A. Thickening vocals</label>
+          <label><input type="radio" name="q15" value="B"> B. Creating a "pumping" effect</label>
+          <label><input type="radio" name="q15" value="C"> C. Removing sibilance</label>
+          <label><input type="radio" name="q15" value="D"> D. Widening the stereo field</label>
+          <label><input type="radio" name="q15" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section II: True/False -->
+    <div class="section">
+      <h2>II. True or False (2 pts each)</h2>
+
+      <div class="question" data-type="tf" data-answer="1" data-score="2">
+        <p>16. Listen to Clip 8. This music is suitable as background music for fitness videos.</p>
+        <audio controls preload="none" src="08.mp3"></audio>
+        <label><input type="radio" name="q16" value="1"> ✅ True</label>
+        <label><input type="radio" name="q16" value="0"> ✗ False</label>
+        <label><input type="radio" name="q16" value="SKIP"> Unable to judge</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="1" data-score="2">
+        <p>17. Listen to Clip 9. You can clearly distinguish the verse and chorus sections.</p>
+        <audio controls preload="none" src="09.mp3"></audio>
+        <label><input type="radio" name="q17" value="1"> ✅ True</label>
+        <label><input type="radio" name="q17" value="0"> ✗ False</label>
+        <label><input type="radio" name="q17" value="SKIP"> Unable to judge</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="0" data-score="2">
+        <p>18. Listen to Clip 10. This song belongs to the "Electronic" genre.</p>
+        <audio controls preload="none" src="10.mp3"></audio>
+        <label><input type="radio" name="q18" value="1"> ✅ True</label>
+        <label><input type="radio" name="q18" value="0"> ✗ False</label>
+        <label><input type="radio" name="q18" value="SKIP"> Unable to judge</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="0" data-score="2">
+        <p>19. In music production, the main purpose of an EQ is to adjust the volume.</p>
+        <label><input type="radio" name="q19" value="1"> ✅ True</label>
+        <label><input type="radio" name="q19" value="0"> ✗ False</label>
+        <label><input type="radio" name="q19" value="SKIP"> Unable to judge</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="1" data-score="2">
+        <p>20. Listen to Clip 11. The song contains a clear Bridge section.</p>
+        <audio controls preload="none" src="11.mp3"></audio>
+        <label><input type="radio" name="q20" value="1"> ✅ True</label>
+        <label><input type="radio" name="q20" value="0"> ✗ False</label>
+        <label><input type="radio" name="q20" value="SKIP"> Unable to judge</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="0" data-score="2">
+        <p>21. Listen to Clip 12. Only piano and strings are used in this excerpt.</p>
+        <audio controls preload="none" src="12.mp3"></audio>
+        <label><input type="radio" name="q21" value="1"> ✅ True</label>
+        <label><input type="radio" name="q21" value="0"> ✗ False</label>
+        <label><input type="radio" name="q21" value="SKIP"> Unable to judge</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="1" data-score="2">
+        <p>22. C major and A minor are relative keys.</p>
+        <label><input type="radio" name="q22" value="1"> ✅ True</label>
+        <label><input type="radio" name="q22" value="0"> ✗ False</label>
+        <label><input type="radio" name="q22" value="SKIP"> Unable to judge</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="1" data-score="2">
+        <p>23. Listen to Clip 13. You can hear a clearly distorted electric guitar.</p>
+        <audio controls preload="none" src="13.mp3"></audio>
+        <label><input type="radio" name="q23" value="1"> ✅ True</label>
+        <label><input type="radio" name="q23" value="0"> ✗ False</label>
+        <label><input type="radio" name="q23" value="SKIP"> Unable to judge</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="0" data-score="2">
+        <p>24. Listen to Clip 14. The vocals have an obvious delay (echo) effect.</p>
+        <audio controls preload="none" src="14.mp3"></audio>
+        <label><input type="radio" name="q24" value="1"> ✅ True</label>
+        <label><input type="radio" name="q24" value="0"> ✗ False</label>
+        <label><input type="radio" name="q24" value="SKIP"> Unable to judge</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="0" data-score="2">
+        <p>25. Adding a lot of reverb to a kick drum usually makes it sound more punchy.</p>
+        <label><input type="radio" name="q25" value="1"> ✅ True</label>
+        <label><input type="radio" name="q25" value="0"> ✗ False</label>
+        <label><input type="radio" name="q25" value="SKIP"> Unable to judge</label>
+      </div>
+    </div>
+
+    <!-- Section III: Short Answer -->
+    <div class="section">
+      <h2>III. Short Answer (6 pts each)</h2>
+
+      <div class="question" data-type="text" data-answer="65" data-tolerance="2" data-score="6">
+        <p>26. Listen to Clip 15 (about 2 min). At what second does the chorus start? (e.g., 76 means 1 min 16 sec). Tolerance ±2 sec.</p>
+        <audio controls preload="none" src="15.mp3"></audio>
+        <input type="text" name="q26" placeholder="Enter seconds, e.g. 76" style="width:120px;">
+        <label><input type="checkbox" class="skip-check" data-target="q26"> Skip this question</label>
+      </div>
+
+      <div class="question" data-type="select" data-answer="B" data-score="6">
+        <p>27. Listen to Clip 16. Which style best matches the rhythmic feel? (10 options)</p>
+        <audio controls preload="none" src="16.mp3"></audio>
+        <select name="q27">
+          <option value="">-- Select --</option>
+          <option value="A">A. Bossa Nova</option>
+          <option value="B">B. Funk</option>
+          <option value="C">C. Reggae</option>
+          <option value="D">D. Disco</option>
+          <option value="E">E. Swing</option>
+          <option value="F">F. Samba</option>
+          <option value="G">G. Reggaeton</option>
+          <option value="H">H. Blues Shuffle</option>
+          <option value="I">I. Dancehall</option>
+          <option value="J">J. Jersey Club</option>
+        </select>
+        <label style="margin-left:15px;"><input type="checkbox" class="skip-check" data-target="q27"> Skip this question</label>
+      </div>
+
+      <div class="question" data-type="blanks" data-answer="D,A,Bm,G" data-score="6">
+        <p>28. Listen to Clip 17. This is a four-chord loop. Write the chord names in order (e.g., Dm, Bb, etc.).</p>
+        <audio controls preload="none" src="17.mp3"></audio>
+        <div class="blank-input">
+          Chord 1: <input type="text" name="q28a" placeholder="e.g. Dm">
+          Chord 2: <input type="text" name="q28b" placeholder="e.g. Bb">
+          Chord 3: <input type="text" name="q28c" placeholder="e.g. Em">
+          Chord 4: <input type="text" name="q28d" placeholder="e.g. A">
+        </div>
+        <label><input type="checkbox" class="skip-check" data-target="q28"> Skip this question</label>
+      </div>
+
+      <div class="question" data-type="text" data-answer="I-vi-IV-V" data-tolerance="0" data-score="6">
+        <p>29. Given the C major progression C - Am - F - G, write it using Roman numeral analysis (uppercase for major, lowercase for minor. <strong>Use '-' between each numeral.</strong> e.g., I-V-vi-IV).</p>
+        <input type="text" name="q29" placeholder="e.g. I-V-vi-IV" style="width:200px;">
+        <label><input type="checkbox" class="skip-check" data-target="q29"> Skip this question</label>
+      </div>
+
+      <div class="question" data-type="multi" data-score="6" data-correct="A,D,E,F">
+        <p>30. Listen to Clip 18 (electric guitar). Select ALL correct descriptions. (Each correct answer gives 1.5 pts; any wrong selection results in 0 pts for this question.)</p>
+        <audio controls preload="none" src="18.mp3"></audio>
+        <div class="options">
+          <label><input type="checkbox" name="q30" value="A"> A. Overdrive / Distortion</label>
+          <label><input type="checkbox" name="q30" value="B"> B. Wah pedal</label>
+          <label><input type="checkbox" name="q30" value="C"> C. Clean tone, no distortion</label>
+          <label><input type="checkbox" name="q30" value="D"> D. Clear reverb</label>
+          <label><input type="checkbox" name="q30" value="E"> E. Clear delay</label>
+          <label><input type="checkbox" name="q30" value="F"> F. Whammy bar / pitch bend</label>
+          <label><input type="checkbox" name="q30" value="G"> G. Tremolo effect</label>
+          <label><input type="checkbox" name="q30" value="H"> H. Flanger effect</label>
+          <label><input type="checkbox" name="q30" value="I"> I. Chorus effect</label>
+          <label><input type="checkbox" name="q30" value="SKIP"> Skip this question</label>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn" onclick="submitQuiz()">📊 Submit & View Score & Answers</button>
+  </form>
+
+  <div class="result" id="result">
+    <div id="scoreText"></div>
+    <div class="grade" id="gradeText"></div>
+  </div>
+  <div class="answer-review" id="answerReview"></div>
+  <div class="footer">For internal evaluation only</div>
+</div>
+
+<script>
+  function submitQuiz() {
+    let totalScore = 0;
+    const questions = document.querySelectorAll('.question');
+    const answerData = [];
+
+    questions.forEach((q, index) => {
+      const type = q.dataset.type;
+      const score = parseInt(q.dataset.score);
+      let userAnswer = '';
+      let isCorrect = false;
+      let isSkipped = false;
+      let earned = 0;
+
+      // Check for skip
+      if (type === 'single' || type === 'tf') {
+        const skipRadio = q.querySelector('input[type="radio"][value="SKIP"]');
+        if (skipRadio && skipRadio.checked) {
+          isSkipped = true;
+          userAnswer = 'Skipped';
+        }
+      } else if (type === 'multi') {
+        const skipCheck = q.querySelector('input[type="checkbox"][value="SKIP"]');
+        if (skipCheck && skipCheck.checked) {
+          isSkipped = true;
+          userAnswer = 'Skipped';
+        }
+      } else {
+        const skipCheck = q.querySelector('.skip-check');
+        if (skipCheck && skipCheck.checked) {
+          isSkipped = true;
+          userAnswer = 'Skipped';
+        }
+      }
+
+      if (isSkipped) {
+        answerData.push({ index: index+1, user: userAnswer, correct: '—', status: 'skip', points: 0 });
+        return;
+      }
+
+      // Score calculation
+      if (type === 'single') {
+        const selected = q.querySelector('input[type="radio"]:checked');
+        if (selected) {
+          userAnswer = selected.value;
+          if (selected.value === q.dataset.answer) {
+            earned = score;
+            totalScore += earned;
+            isCorrect = true;
+          }
+        }
+      }
+      else if (type === 'tf') {
+        const selected = q.querySelector('input[type="radio"]:checked');
+        if (selected) {
+          userAnswer = selected.value === '1' ? 'True' : 'False';
+          if (selected.value === q.dataset.answer) {
+            earned = score;
+            totalScore += earned;
+            isCorrect = true;
+          }
+        }
+      }
+      else if (type === 'multi') {
+        const checked = Array.from(q.querySelectorAll('input[type="checkbox"]:checked')).map(i => i.value);
+        userAnswer = checked.join(', ');
+        // Q7 special
+        if (q.dataset.extra) {
+          const extra = q.dataset.extra;
+          const hasE = checked.includes('E');
+          if (!hasE) {
+            let base = 0;
+            const requiredACD = ['A','C','D'];
+            const hasAllACD = requiredACD.every(v => checked.includes(v));
+            if (hasAllACD) base = 2;
+            if (checked.includes(extra)) base += 1;
+            earned = Math.min(base, score);
+            totalScore += earned;
+            isCorrect = earned > 0;
+          }
+        }
+        // Q30 normal multi (1.5 each correct, 0 if any wrong)
+        else {
+          const correctArr = q.dataset.correct.split(',');
+          const hasAnyWrong = checked.some(v => !correctArr.includes(v));
+          if (!hasAnyWrong && checked.length > 0) {
+            earned = checked.filter(v => correctArr.includes(v)).length * 1.5;
+            earned = Math.min(earned, score);
+            totalScore += earned;
+            isCorrect = earned > 0;
+          }
+        }
+      }
+      else if (type === 'text') {
+        const input = q.querySelector('input[type="text"]');
+        if (input) {
+          const val = input.value.trim();
+          userAnswer = val;
+          const answer = q.dataset.answer;
+          const tolerance = parseInt(q.dataset.tolerance) || 0;
+          let match = false;
+          if (tolerance > 0) {
+            const numVal = parseFloat(val);
+            const numAns = parseFloat(answer);
+            if (!isNaN(numVal) && Math.abs(numVal - numAns) <= tolerance) {
+              match = true;
+            }
+          } else {
+            const normalizedVal = val.replace(/\s+/g, '').toLowerCase();
+            const normalizedAns = answer.replace(/\s+/g, '').toLowerCase();
+            if (normalizedVal === normalizedAns) match = true;
+          }
+          if (match) {
+            earned = score;
+            totalScore += earned;
+            isCorrect = true;
+          }
+        }
+      }
+      else if (type === 'select') {
+        const select = q.querySelector('select');
+        if (select) {
+          userAnswer = select.value;
+          if (select.value === q.dataset.answer) {
+            earned = score;
+            totalScore += earned;
+            isCorrect = true;
+          }
+        }
+      }
+      else if (type === 'blanks') {
+        const answers = q.dataset.answer.split(',');
+        const inputs = q.querySelectorAll('input[type="text"]');
+        let correct = true;
+        const userVals = [];
+        inputs.forEach((inp, idx) => {
+          const v = inp.value.trim();
+          userVals.push(v);
+          if (v.toLowerCase() !== answers[idx].toLowerCase()) {
+            correct = false;
+          }
+        });
+        userAnswer = userVals.join(', ');
+        if (correct) {
+          earned = score;
+          totalScore += earned;
+          isCorrect = true;
+        }
+      }
+
+      // Build correct answer string for display
+      let correctDisplay = '';
+      if (type === 'single' || type === 'tf') {
+        correctDisplay = type === 'tf' ? (q.dataset.answer === '1' ? 'True' : 'False') : q.dataset.answer;
+      } else if (type === 'multi') {
+        if (q.dataset.extra) {
+          correctDisplay = 'Acoustic Guitar, Electronic Drums, Synthesizer (+Piano bonus), Cello gives 0';
+        } else {
+          correctDisplay = q.dataset.correct;
+        }
+      } else if (type === 'text') {
+        correctDisplay = q.dataset.answer + (q.dataset.tolerance > 0 ? ' (tolerance ±'+q.dataset.tolerance+'s)' : '');
+      } else if (type === 'select') {
+        correctDisplay = q.dataset.answer;
+      } else if (type === 'blanks') {
+        correctDisplay = q.dataset.answer;
+      }
+
+      answerData.push({
+        index: index+1,
+        user: userAnswer || 'No answer',
+        correct: correctDisplay,
+        status: isCorrect ? 'correct' : 'wrong',
+        points: earned
+      });
+    });
+
+    // Grade
+    let grade = '';
+    if (totalScore <= 25) grade = 'Basic';
+    else if (totalScore <= 50) grade = 'Intermediate';
+    else if (totalScore <= 70) grade = 'Enthusiast';
+    else if (totalScore <= 90) grade = 'Professional';
+    else grade = 'Producer Level';
+
+    document.getElementById('scoreText').innerHTML = 'Your Score: ' + totalScore + ' / 100';
+    document.getElementById('gradeText').innerHTML = 'Level: ' + grade;
+    document.getElementById('result').style.display = 'block';
+
+    let reviewHTML = '<h3>📋 Answer Review</h3>';
+    answerData.forEach(item => {
+      let statusClass = item.status === 'correct' ? 'correct' : (item.status === 'skip' ? 'skip' : 'wrong');
+      let statusText = item.status === 'correct' ? '✔ Correct' : (item.status === 'skip' ? '⊘ Skipped' : '✘ Wrong');
+      reviewHTML += `<div class="answer-item">
+        <span><strong>Q${item.index}</strong> Your answer: ${item.user}</span>
+        <span>Correct: ${item.correct}</span>
+        <span class="${statusClass}">${statusText} (${item.points} pts)</span>
+      </div>`;
+    });
+    const reviewDiv = document.getElementById('answerReview');
+    reviewDiv.innerHTML = reviewHTML;
+    reviewDiv.style.display = 'block';
+
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
