@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>音乐素养测试</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; background: #f0f2f5; color: #333; line-height: 1.6; padding: 20px; }
+    .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); padding: 30px; }
+    h1 { text-align: center; font-size: 28px; margin-bottom: 5px; color: #1a1a2e; }
+    .subtitle { text-align: center; font-size: 14px; color: #666; margin-bottom: 30px; }
+    .section { margin-bottom: 35px; }
+    .section h2 { font-size: 20px; border-left: 5px solid #4a6cf7; padding-left: 12px; margin-bottom: 20px; color: #1a1a2e; }
+    .question { background: #fafbfc; border-radius: 12px; padding: 18px; margin-bottom: 18px; border: 1px solid #e9ecef; }
+    .question p { font-weight: 600; margin-bottom: 8px; }
+    audio { width: 100%; margin: 8px 0 12px; border-radius: 8px; }
+    .options label { display: block; margin: 6px 0; cursor: pointer; padding: 4px 8px; border-radius: 6px; transition: background 0.2s; }
+    .options label:hover { background: #eef2ff; }
+    input[type="radio"], input[type="checkbox"] { margin-right: 8px; transform: scale(1.1); }
+    .blank-input { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 8px; }
+    .blank-input input { width: 80px; padding: 8px 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
+    .blank-input input:focus { border-color: #4a6cf7; outline: none; }
+    select { padding: 10px 15px; border-radius: 8px; border: 2px solid #ddd; font-size: 16px; background: white; }
+    .btn { display: block; width: 100%; padding: 14px; background: #4a6cf7; color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: 600; cursor: pointer; margin-top: 20px; transition: background 0.2s; }
+    .btn:hover { background: #3451d1; }
+    .result { display: none; text-align: center; font-size: 22px; font-weight: bold; margin-top: 25px; padding: 20px; background: #eef2ff; border-radius: 12px; }
+    .grade { font-size: 28px; color: #4a6cf7; margin-top: 5px; }
+    .footer { text-align: center; margin-top: 30px; font-size: 13px; color: #aaa; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>🎵 音乐素养测试</h1>
+  <p class="subtitle">满分100分 · 选择题50分 + 判断题20分 + 简答题30分</p>
+
+  <form id="quizForm">
+    <!-- ========== 一、选择题 ========== -->
+    <div class="section">
+      <h2>一、选择题（1-10题每题3分，11-15题每题4分）</h2>
+
+      <!-- Q1 -->
+      <div class="question" data-type="single" data-answer="B" data-score="3">
+        <p>1. 听片段1，这段音乐给你的最主要情绪感受是？</p>
+        <audio controls preload="none" src="01.mp3"></audio>
+        <div class="options">
+          <label><input type="radio" name="q1" value="A"> A. 紧张、悬疑</label>
+          <label><input type="radio" name="q1" value="B"> B. 快乐、兴奋</label>
+          <label><input type="radio" name="q1" value="C"> C. 悲伤、抒情</label>
+          <label><input type="radio" name="q1" value="D"> D. 平静、放松</label>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question" data-type="single" data-answer="A" data-score="3">
+        <p>2. 听片段2中的人声，其音色最显著的特征是？</p>
+        <audio controls preload="none" src="02.mp3"></audio>
+        <div class="options">
+          <label><input type="radio" name="q2" value="A"> A. 沙哑厚实</label>
+          <label><input type="radio" name="q2" value="B"> B. 清亮柔美</label>
+          <label><input type="radio" name="q2" value="C"> C. 气声梦幻</label>
+          <label><input type="radio" name="q2" value="D"> D. 锐利有力</label>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question" data-type="single" data-answer="A" data-score="3">
+        <p>3. “Allegro”是描述音乐中哪个要素的术语？</p>
+        <div class="options">
+          <label><input type="radio" name="q3" value="A"> A. 速度</label>
+          <label><input type="radio" name="q3" value="B"> B. 力度</label>
+          <label><input type="radio" name="q3" value="C"> C. 音高</label>
+          <label><input type="radio" name="q3" value="D"> D. 音色</label>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="question" data-type="single" data-answer="B" data-score="3">
+        <p>4. 听片段3，这首歌曲最可能属于以下哪个风格大类？</p>
+        <audio controls preload="none" src="03.mp3"></audio>
+        <div class="options">
+          <label><input type="radio" name="q4" value="A"> A. 摇滚</label>
+          <label><input type="radio" name="q4" value="B"> B. 说唱</label>
+          <label><input type="radio" name="q4" value="C"> C. 电子</label>
+          <label><input type="radio" name="q4" value="D"> D. 民谣</label>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question" data-type="single" data-answer="A" data-score="3">
+        <p>5. 一首典型流行歌曲，若包含以下全部6个段落，最常见的顺序是？</p>
+        <div class="options">
+          <label><input type="radio" name="q5" value="A"> A. Intro → Verse → Pre-Chorus → Chorus → Bridge → Outro</label>
+          <label><input type="radio" name="q5" value="B"> B. Intro → Chorus → Verse → Pre-Chorus → Bridge → Outro</label>
+          <label><input type="radio" name="q5" value="C"> C. Verse → Pre-Chorus → Chorus → Intro → Bridge → Outro</label>
+          <label><input type="radio" name="q5" value="D"> D. Intro → Pre-Chorus → Verse → Chorus → Bridge → Outro</label>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="question" data-type="single" data-answer="B" data-score="3">
+        <p>6. 以下哪项是“爵士乐”通常具备的特征？</p>
+        <div class="options">
+          <label><input type="radio" name="q6" value="A"> A. 失真吉他、快速扫弦</label>
+          <label><input type="radio" name="q6" value="B"> B. 切分节奏、管乐即兴</label>
+          <label><input type="radio" name="q6" value="C"> C. 808鼓机、自动调音</label>
+          <label><input type="radio" name="q6" value="D"> D. 三和弦为主、节奏规整</label>
+        </div>
+      </div>
+
+      <!-- Q7 (多选) -->
+      <div class="question" data-type="multi" data-score="3" data-correct="A,C,D" data-extra="B">
+        <p>7. 听片段4，你能同时听到哪几种配器？（多选）<br>选E大提琴直接0分，选A木吉他+C电子鼓+D合成器得2分，再加选B钢琴得3分。</p>
+        <audio controls preload="none" src="04.mp3"></audio>
+        <div class="options">
+          <label><input type="checkbox" name="q7" value="A"> A. 木吉他</label>
+          <label><input type="checkbox" name="q7" value="B"> B. 钢琴</label>
+          <label><input type="checkbox" name="q7" value="C"> C. 电子鼓</label>
+          <label><input type="checkbox" name="q7" value="D"> D. 合成器</label>
+          <label><input type="checkbox" name="q7" value="E"> E. 大提琴</label>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="question" data-type="single" data-answer="C" data-score="3">
+        <p>8. 在混音过程中，以下哪个设备/插件主要用于控制声音的动态范围？</p>
+        <div class="options">
+          <label><input type="radio" name="q8" value="A"> A. 混响器（Reverb）</label>
+          <label><input type="radio" name="q8" value="B"> B. 延迟器（Delay）</label>
+          <label><input type="radio" name="q8" value="C"> C. 压缩器（Compressor）</label>
+          <label><input type="radio" name="q8" value="D"> D. 均衡器（Equalizer）</label>
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="question" data-type="single" data-answer="C" data-score="3">
+        <p>9. 听片段5，这段音乐的拍号是？</p>
+        <audio controls preload="none" src="05.mp3"></audio>
+        <div class="options">
+          <label><input type="radio" name="q9" value="A"> A. 4/4</label>
+          <label><input type="radio" name="q9" value="B"> B. 3/4</label>
+          <label><input type="radio" name="q9" value="C"> C. 6/8</label>
+          <label><input type="radio" name="q9" value="D"> D. 7/8</label>
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="question" data-type="single" data-answer="B" data-score="3">
+        <p>10. 一个C大调的I－V－vi－IV级和弦进行，对应的和弦音名是？</p>
+        <div class="options">
+          <label><input type="radio" name="q10" value="A"> A. C - F - Am - G</label>
+          <label><input type="radio" name="q10" value="B"> B. C - G - Am - F</label>
+          <label><input type="radio" name="q10" value="C"> C. C - Am - G - F</label>
+          <label><input type="radio" name="q10" value="D"> D. F - G - Em - Am</label>
+        </div>
+      </div>
+
+      <!-- Q11 -->
+      <div class="question" data-type="single" data-answer="C" data-score="4">
+        <p>11. 听片段6的人声，主要使用了哪种效果处理？</p>
+        <audio controls preload="none" src="06.mp3"></audio>
+        <div class="options">
+          <label><input type="radio" name="q11" value="A"> A. 大混响，无延迟</label>
+          <label><input type="radio" name="q11" value="B"> B. 明显延迟（回声），混响较少</label>
+          <label><input type="radio" name="q11" value="C"> C. 大混响+大延迟</label>
+          <label><input type="radio" name="q11" value="D"> D. 几乎干声，仅少量压缩</label>
+        </div>
+      </div>
+
+      <!-- Q12 -->
+      <div class="question" data-type="single" data-answer="B" data-score="4">
+        <p>12. 听片段7的贝斯音色，最贴切的形容是？</p>
+        <audio controls preload="none" src="07.mp3"></audio>
+        <div class="options">
+          <label><input type="radio" name="q12" value="A"> A. 无品原声贝斯，音色柔和</label>
+          <label><input type="radio" name="q12" value="B"> B. 合成器sub bass，圆润厚重</label>
+          <label><input type="radio" name="q12" value="C"> C. 带失真的合成器贝斯，中高频突出且肥厚</label>
+          <label><input type="radio" name="q12" value="D"> D. 拨片演奏的P贝斯，音头有力</label>
+        </div>
+      </div>
+
+      <!-- Q13 -->
+      <div class="question" data-type="single" data-answer="B" data-score="4">
+        <p>13. 在编曲中，为了让各乐器在频率上不互相“打架”，常见的做法是？</p>
+        <div class="options">
+          <label><input type="radio" name="q13" value="A"> A. 把所有乐器音量调到一致</label>
+          <label><input type="radio" name="q13" value="B"> B. 通过EQ为每件乐器分配不同的频段空间</label>
+          <label><input type="radio" name="q13" value="C"> C. 给所有乐器加相同的混响</label>
+          <label><input type="radio" name="q13" value="D"> D. 把乐器都放在声场正中间</label>
+        </div>
+      </div>
+
+      <!-- Q14 -->
+      <div class="question" data-type="single" data-answer="B" data-score="4">
+        <p>14. 减七和弦（dim7）的音程结构是？</p>
+        <div class="options">
+          <label><input type="radio" name="q14" value="A"> A. 小三度 + 小三度 + 大三度</label>
+          <label><input type="radio" name="q14" value="B"> B. 小三度 + 小三度 + 小三度</label>
+          <label><input type="radio" name="q14" value="C"> C. 大三度 + 小三度 + 小三度</label>
+          <label><input type="radio" name="q14" value="D"> D. 大三度 + 大三度 + 小三度</label>
+        </div>
+      </div>
+
+      <!-- Q15 -->
+      <div class="question" data-type="single" data-answer="B" data-score="4">
+        <p>15. Sidechain Compression（侧链压缩）在电子舞曲中最经典的应用是？</p>
+        <div class="options">
+          <label><input type="radio" name="q15" value="A"> A. 增加人声厚度</label>
+          <label><input type="radio" name="q15" value="B"> B. 制造“抽吸感”</label>
+          <label><input type="radio" name="q15" value="C"> C. 消除齿音</label>
+          <label><input type="radio" name="q15" value="D"> D. 扩展立体声场</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 二、判断题 ========== -->
+    <div class="section">
+      <h2>二、判断题（每题2分）</h2>
+
+      <div class="question" data-type="tf" data-answer="1" data-score="2">
+        <p>16. 听片段8，这段音乐适合作为运动健身类视频的BGM。</p>
+        <audio controls preload="none" src="08.mp3"></audio>
+        <label><input type="radio" name="q16" value="1"> ✅ 正确</label>
+        <label><input type="radio" name="q16" value="0"> ✗ 错误</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="1" data-score="2">
+        <p>17. 听片段9，可以清晰分辨出主歌和副歌的段落转换。</p>
+        <audio controls preload="none" src="09.mp3"></audio>
+        <label><input type="radio" name="q17" value="1"> ✅ 正确</label>
+        <label><input type="radio" name="q17" value="0"> ✗ 错误</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="0" data-score="2">
+        <p>18. 听片段10，这首歌曲属于“电子”风格大类。</p>
+        <audio controls preload="none" src="10.mp3"></audio>
+        <label><input type="radio" name="q18" value="1"> ✅ 正确</label>
+        <label><input type="radio" name="q18" value="0"> ✗ 错误</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="0" data-score="2">
+        <p>19. 在音乐制作中，EQ（均衡器）的主要作用是调整音量大小。</p>
+        <label><input type="radio" name="q19" value="1"> ✅ 正确</label>
+        <label><input type="radio" name="q19" value="0"> ✗ 错误</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="1" data-score="2">
+        <p>20. 听片段11，歌曲中出现了明显的Bridge段落。</p>
+        <audio controls preload="none" src="11.mp3"></audio>
+        <label><input type="radio" name="q20" value="1"> ✅ 正确</label>
+        <label><input type="radio" name="q20" value="0"> ✗ 错误</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="0" data-score="2">
+        <p>21. 听片段12，整段音乐只使用了钢琴和弦乐两种配器。</p>
+        <audio controls preload="none" src="12.mp3"></audio>
+        <label><input type="radio" name="q21" value="1"> ✅ 正确</label>
+        <label><input type="radio" name="q21" value="0"> ✗ 错误</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="1" data-score="2">
+        <p>22. “C大调”和“A小调”互为关系大小调。</p>
+        <label><input type="radio" name="q22" value="1"> ✅ 正确</label>
+        <label><input type="radio" name="q22" value="0"> ✗ 错误</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="1" data-score="2">
+        <p>23. 听片段13，可以听到明显的失真电吉他。</p>
+        <audio controls preload="none" src="13.mp3"></audio>
+        <label><input type="radio" name="q23" value="1"> ✅ 正确</label>
+        <label><input type="radio" name="q23" value="0"> ✗ 错误</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="0" data-score="2">
+        <p>24. 听片段14，人声使用了明显的延迟（delay）效果。</p>
+        <audio controls preload="none" src="14.mp3"></audio>
+        <label><input type="radio" name="q24" value="1"> ✅ 正确</label>
+        <label><input type="radio" name="q24" value="0"> ✗ 错误</label>
+      </div>
+      <div class="question" data-type="tf" data-answer="0" data-score="2">
+        <p>25. 在混音中，给底鼓加大量混响通常会让它听起来更有冲击力。</p>
+        <label><input type="radio" name="q25" value="1"> ✅ 正确</label>
+        <label><input type="radio" name="q25" value="0"> ✗ 错误</label>
+      </div>
+    </div>
+
+    <!-- ========== 三、简答题 ========== -->
+    <div class="section">
+      <h2>三、简答题（每题6分）</h2>
+
+      <div class="question" data-type="text" data-answer="76" data-tolerance="2" data-score="6">
+        <p>26. 听片段15（全长约2分钟），副歌开始的时间是？请填写秒数（例如76表示1分16秒）。误差±2秒内得6分。</p>
+        <audio controls preload="none" src="15.mp3"></audio>
+        <input type="text" name="q26" placeholder="输入秒数，如76" style="width:120px;">
+      </div>
+
+      <div class="question" data-type="select" data-answer="B" data-score="6">
+        <p>27. 听片段16，这段音乐的节奏型最符合以下哪种风格的特征？（10选1）</p>
+        <audio controls preload="none" src="16.mp3"></audio>
+        <select name="q27">
+          <option value="">-- 请选择 --</option>
+          <option value="A">A. Bossa Nova</option>
+          <option value="B">B. Funk</option>
+          <option value="C">C. Reggae</option>
+          <option value="D">D. Disco</option>
+          <option value="E">E. Swing</option>
+          <option value="F">F. Samba</option>
+          <option value="G">G. Reggaeton</option>
+          <option value="H">H. Blues Shuffle</option>
+          <option value="I">I. Dancehall</option>
+          <option value="J">J. Jersey Club</option>
+        </select>
+      </div>
+
+      <div class="question" data-type="blanks" data-answer="C,G,Am,F" data-score="6">
+        <p>28. 听片段17，这是四个和弦的循环。请按顺序填写和弦名称（只需写大小三和弦，如 C、Am 等）。</p>
+        <audio controls preload="none" src="17.mp3"></audio>
+        <div class="blank-input">
+          和弦1: <input type="text" name="q28a" placeholder="如 C">
+          和弦2: <input type="text" name="q28b" placeholder="如 G">
+          和弦3: <input type="text" name="q28c" placeholder="如 Am">
+          和弦4: <input type="text" name="q28d" placeholder="如 F">
+        </div>
+      </div>
+
+      <div class="question" data-type="text" data-answer="I-vi-IV-V" data-tolerance="0" data-score="6">
+        <p>29. 已知C大调和弦进行 C - Am - F - G，请用罗马数字级数表示（大三用大写，小三用小写，如 I-vi-IV-V）。</p>
+        <input type="text" name="q29" placeholder="例如 I-vi-IV-V" style="width:200px;">
+      </div>
+
+      <div class="question" data-type="multi" data-score="6" data-correct="A,D,E,F">
+        <p>30. 听片段18的电吉他，选出所有正确的描述（多选，全对得6分，错选或漏选0分）：</p>
+        <audio controls preload="none" src="18.mp3"></audio>
+        <div class="options">
+          <label><input type="checkbox" name="q30" value="A"> A. 使用了过载/失真</label>
+          <label><input type="checkbox" name="q30" value="B"> B. 使用了哇音踏板</label>
+          <label><input type="checkbox" name="q30" value="C"> C. 清音音色，无失真</label>
+          <label><input type="checkbox" name="q30" value="D"> D. 带有明显的混响</label>
+          <label><input type="checkbox" name="q30" value="E"> E. 带有明显的延迟</label>
+          <label><input type="checkbox" name="q30" value="F"> F. 使用了摇把/弯音</label>
+          <label><input type="checkbox" name="q30" value="G"> G. 带有颤音效果</label>
+          <label><input type="checkbox" name="q30" value="H"> H. 带有镶边效果</label>
+          <label><input type="checkbox" name="q30" value="I"> I. 带有合唱效果</label>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn" onclick="submitQuiz()">📊 提交测试，查看得分</button>
+  </form>
+
+  <div class="result" id="result">
+    <div id="scoreText"></div>
+    <div class="grade" id="gradeText"></div>
+  </div>
+  <div class="footer">本测试仅供内部评估使用</div>
+</div>
+
+<script>
+  function submitQuiz() {
+    let totalScore = 0;
+    const questions = document.querySelectorAll('.question');
+    
+    questions.forEach(q => {
+      const type = q.dataset.type;
+      const score = parseInt(q.dataset.score);
+      
+      if (type === 'single') {
+        const selected = q.querySelector('input[type="radio"]:checked');
+        if (selected && selected.value === q.dataset.answer) {
+          totalScore += score;
+        }
+      }
+      else if (type === 'tf') {
+        const selected = q.querySelector('input[type="radio"]:checked');
+        if (selected && selected.value === q.dataset.answer) {
+          totalScore += score;
+        }
+      }
+      else if (type === 'multi') {
+        const correctArr = q.dataset.correct.split(',');
+        const checked = Array.from(q.querySelectorAll('input[type="checkbox"]:checked')).map(i => i.value);
+        
+        if (q.dataset.extra) {
+          const extra = q.dataset.extra;
+          const hasE = checked.includes('E');
+          if (hasE) {
+            // 0分
+          } else {
+            let base = 0;
+            const acd = ['A','C','D'];
+            let acdCount = 0;
+            acd.forEach(v => { if(checked.includes(v)) acdCount++; });
+            if (acdCount >= 2) base = 2;
+            if (checked.includes(extra)) base += 1;
+            totalScore += Math.min(base, score);
+          }
+        }
+        else {
+          if (correctArr.length === checked.length && correctArr.every(v => checked.includes(v))) {
+            totalScore += score;
+          }
+        }
+      }
+      else if (type === 'text') {
+        const input = q.querySelector('input[type="text"]');
+        if (input) {
+          const val = input.value.trim();
+          const answer = q.dataset.answer;
+          const tolerance = parseInt(q.dataset.tolerance) || 0;
+          if (tolerance > 0) {
+            const numVal = parseFloat(val);
+            const numAns = parseFloat(answer);
+            if (!isNaN(numVal) && Math.abs(numVal - numAns) <= tolerance) {
+              totalScore += score;
+            }
+          } else {
+            const normalizedVal = val.replace(/\s+/g, '').toLowerCase();
+            const normalizedAns = answer.replace(/\s+/g, '').toLowerCase();
+            if (normalizedVal === normalizedAns) {
+              totalScore += score;
+            }
+          }
+        }
+      }
+      else if (type === 'select') {
+        const select = q.querySelector('select');
+        if (select && select.value === q.dataset.answer) {
+          totalScore += score;
+        }
+      }
+      else if (type === 'blanks') {
+        const answers = q.dataset.answer.split(',');
+        const inputs = q.querySelectorAll('input[type="text"]');
+        let correct = true;
+        if (inputs.length === answers.length) {
+          inputs.forEach((inp, idx) => {
+            if (inp.value.trim().toLowerCase() !== answers[idx].toLowerCase()) {
+              correct = false;
+            }
+          });
+          if (correct) totalScore += score;
+        }
+      }
+    });
+
+    let grade = '';
+    if (totalScore <= 25) grade = '基础级';
+    else if (totalScore <= 50) grade = '进阶级';
+    else if (totalScore <= 70) grade = '乐迷级';
+    else if (totalScore <= 90) grade = '专业级';
+    else grade = '制作人级';
+
+    document.getElementById('scoreText').innerHTML = '你的得分：' + totalScore + ' / 100';
+    document.getElementById('gradeText').innerHTML = '对应等级：' + grade;
+    document.getElementById('result').style.display = 'block';
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
